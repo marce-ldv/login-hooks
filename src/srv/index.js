@@ -53,7 +53,6 @@ app.listen(app.get('port'), () => {
     console.log(`Listen on port `, app.get('port'));
 })
 
-
 /**
  * DATA BASE FUNCTIONS
  */
