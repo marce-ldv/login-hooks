@@ -1,15 +1,22 @@
 import React, {Fragment, useState} from "react";
 import {newModel as registerData} from "../../types/forms/register";
 import {useRegisterUser} from './hooks';
+import axios from '../../core/axiosInstance';
 
 export default function RegisterForm(props) {
 
     /**
      * Register hooks
      */
-    const {handleSubmit, onChange} = useRegisterUser(
-        (e, model) => {
-            console.log("submited with data: ", model);
+    const {handleSubmit, onChange} = useRegisterUser(async (e, userData) => {
+            console.log("submited with data: ", userData);
+            try {
+                const response = await axios.post("/register", {userData});
+
+                console.log(response);
+            } catch (e) {
+                console.log(e)
+            }
         },
         registerData
     );

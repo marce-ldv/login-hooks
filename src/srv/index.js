@@ -11,8 +11,18 @@ const memoryDataBase = {
     users: {},
 };
 
-app.use( morgan );
+app.use( morgan('tiny') );
 app.use( express.json() );
+
+/**
+ * CORS
+ * https://enable-cors.org/server_expressjs.html
+ */
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "*");
+    next();
+});
 
 app.set( 'port', process.env.PORTS || 4000 );
 app.use( morgan( 'server' ) );
@@ -30,19 +40,19 @@ app.post('/login', (req, res, next) => {
     }
 
     return res.status(404).send('user not exists');
-})
+});
 
 app.post('/register', (req, res) => {
     // destruct data
-    const { userData } = req.params;
+    const { userData } = req.body;
 
     // check if user exists
-    if (userExists(userData.userName)) {
-        return res.status(401).send("User is already Register");
+    if (userExists(userData.user_name)) {
+        return res.status(200).send("User is already Register");
     }
 
     // registerUser
-    addUser(userData.userName, userData);
+    addUser(userData.user_name, userData);
     return res.status(200).send("Register successfully")
 });
 
@@ -51,14 +61,14 @@ app.post('/register', (req, res) => {
  */
 app.listen(app.get('port'), () => {
     console.log(`Listen on port `, app.get('port'));
-})
+});
 
 /**
  * DATA BASE FUNCTIONS
  */
 const userExists = ( id ) => {
     return memoryDataBase.users.hasOwnProperty(id);
-}
+};
 
 const addUser = ( id, data ) => memoryDataBase.users[id] = data;
 
@@ -69,7 +79,7 @@ const checkPassword = ( id, pass ) => {
     } catch( e ){
         console.error( e );
     }
-}
+};
 
 
 /**
