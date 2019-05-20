@@ -19,10 +19,10 @@ app.use( morgan( 'server' ) );
 
 app.post('/login', (req, res, next) => {
     const { userdata } = req.params;
-    
+
     if( userExists( userData.userName ) ) {
         // the password should be equal to the password in memory database
-        
+
         if( ! checkPassword( userData.id , userData.password ) ) {
             return res.status(404).send("Error");
         }
@@ -35,7 +35,7 @@ app.post('/login', (req, res, next) => {
 app.post('/register', (req, res) => {
     // destruct data
     const { userData } = req.params;
-    
+
     // check if user exists
     if (userExists(userData.userName)) {
         return res.status(401).send("User is already Register");
@@ -44,7 +44,7 @@ app.post('/register', (req, res) => {
     // registerUser
     addUser(userData.userName, userData);
     return res.status(200).send("Register successfully")
-}); 
+});
 
 /**
  * Listen server
@@ -74,7 +74,7 @@ const checkPassword = ( id, pass ) => {
 
 /**
  * Z-ORM
- * by: sergio molina company 
+ * by: sergio molina company
  */
 
 const entityWrapper = table => ({
@@ -91,9 +91,9 @@ const createTable = table => memoryDataBase[tableName] = {};
 const deleteTable = table => delete memoryDataBase[table];
 
 /** sample
- * 
+ *
  * createTable("users");
  * const addUser = entityWrapper("users").addEntity;
  * addUser("Sergio", {name: "sergio", lastname: "molina"});
- * 
+ *
  */

@@ -5,6 +5,6 @@ const model = {
   email: ""
 };
 
-export function newModel(modelParams = model) {
-  return modelParams;
+export function newModel(model = model) {
+  return model;
 }
