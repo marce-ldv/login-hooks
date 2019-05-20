@@ -10,7 +10,7 @@ const memoryDataBase = {
     //Tables
     users: {},
 };
-
+console.log(memoryDataBase.user)
 app.use( morgan('tiny') );
 app.use( express.json() );
 
@@ -28,7 +28,7 @@ app.set( 'port', process.env.PORTS || 4000 );
 app.use( morgan( 'server' ) );
 
 app.post('/login', (req, res, next) => {
-    const { userdata } = req.params;
+    const { userdata } = req.body;
 
     if( userExists( userData.userName ) ) {
         // the password should be equal to the password in memory database
@@ -75,7 +75,7 @@ const addUser = ( id, data ) => memoryDataBase.users[id] = data;
 const checkPassword = ( id, pass ) => {
     try{
         let user = memoryDataBase.users[id];
-        return user.password === pass ? true : false;
+        return user.password === pass;
     } catch( e ){
         console.error( e );
     }
