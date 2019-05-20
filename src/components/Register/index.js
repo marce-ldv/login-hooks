@@ -1,9 +1,8 @@
 import React from "react";
 import {formType} from "../../types/forms/register";
-import {useField, useZForm} from "../ZForms/";
-import {ZField as Field} from "../ZForms/field";
+import {useField, useZForm, Field} from "../ZForms/";
 
-export default function RegisterForm(props) {
+export default function RegisterForm() {
 
     function onSumbit(values) {
         console.log(values);
@@ -19,7 +18,6 @@ export default function RegisterForm(props) {
     return (
         <>
             <Form onSubmit={handleSubmit}>
-                {/*{isValid && formType.map(field => (<ZInput field={field} onChange={onChange} key={field.name} />))}*/}
                 <Field {...userName} />
                 <Field {...password} />
                 <Field {...rePassword} />

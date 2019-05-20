@@ -48,7 +48,7 @@ const useZForm = (formType, callback) => {
 };
 
 const useField = (fields, name, inputStyled = false, labelStyled = false) => {
-    if (typeof fields[name] === 'undefined') throw new Error(`The field with the name ${name} don't exists`);
+    if (typeof fields[name] === 'undefined') throw new Error(`The field with the name "${name}" don't exists in the model`);
     const {[name]: field} = fields;
     return {...field, inputStyled, labelStyled};
 };

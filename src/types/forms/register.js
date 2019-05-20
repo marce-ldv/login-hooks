@@ -1,4 +1,4 @@
-import {FieldBuilder, TEXT_INPUT, EMAIL_INPUT, PASSWORD_INPUT} from "../../components/ZForms/types";
+import {FieldBuilder, EMAIL_INPUT, PASSWORD_INPUT} from "../../components/ZForms/types";
 
 /**
  * FORM TYPE WITH Z-FORM
